@@ -1,0 +1,28 @@
+# Starter pipeline
+
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+ vmImage: 'windows-latest'
+ 
+steps:
+- task: BrowserStackConfig@0
+  inputs:
+    BrowserStackServiceEndPoint: 'BrowserStack'
+- task: Gradle@3
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'test -Penvironment=single'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: false
+    spotBugsAnalysis: false
+- task: BrowserStackResults@1
+  inputs:
+    browserstackProduct: 'automate'

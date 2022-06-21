@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java : corretto11
+  pre_build :
+    commands :
+      - echo test pre condicion
+  build:
+    commands:
+      - echo Building the code...
+      - gradle clean test

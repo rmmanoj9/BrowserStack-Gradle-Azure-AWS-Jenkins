@@ -14,10 +14,10 @@ steps:
 - task: BrowserStackConfig@0
   inputs:
     BrowserStackServiceEndPoint: 'BrowserStack'
-- task: Gradle@3
+- task: Gradle@4
   inputs:
     gradleWrapperFile: 'gradlew'
-    tasks: 'test -Penvironment=single'
+    tasks: 'build'
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
